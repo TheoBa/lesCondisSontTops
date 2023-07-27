@@ -1,0 +1,7 @@
+pandas
+streamlit
+streamlit_folium
+folium
+altair==4.0
+plotly
+plotly.express
