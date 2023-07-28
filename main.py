@@ -33,6 +33,7 @@ def process_open_meteo(response):
         res_df = pd.DataFrame(res["hourly"])
     except :
         st.write('Pas de condis sur la terre petit malin')
+        return 'error'
     res_df["time"] = res_df["time"].map(lambda x: datetime.strptime(x, "%Y-%m-%dT%H:00"))
     return res_df
 
@@ -89,6 +90,7 @@ with col1:
             else:
                 resp = query_open_meteo(lat=data[0], lng=data[1])
                 resp_df = process_open_meteo(resp)
-                figs = build_figs(resp_df)
-                display_current_condis(resp_df)
-                display_forcast_condis(figs)
+                if type(resp_df) != str :
+                    figs = build_figs(resp_df)
+                    display_current_condis(resp_df)
+                    display_forcast_condis(figs)
