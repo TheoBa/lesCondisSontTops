@@ -29,7 +29,10 @@ def query_open_meteo(
 
 def process_open_meteo(response):
     res = json.loads(response)
-    res_df = pd.DataFrame(res["hourly"])
+    try :
+        res_df = pd.DataFrame(res["hourly"])
+    except :
+        st.write('Pas de condis sur la terre petit malin')
     res_df["time"] = res_df["time"].map(lambda x: datetime.strptime(x, "%Y-%m-%dT%H:00"))
     return res_df
 
